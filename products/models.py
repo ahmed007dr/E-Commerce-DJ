@@ -28,6 +28,10 @@ class Product(models.Model):
         self.slug = slugify(self.name) # slugify ===> convert text to slug "CEO"
         super(Product,self).save(*args , **kwargs) #=======> 
 
+    def __str__(self):
+        return self.name
+    
+
 class ProdcutImages(models.Model):
     prodcut = models.ForeignKey(Product,related_name='prodcut_image',on_delete=models.CASCADE)
     image = models.ImageField(upload_to='product_image')
@@ -42,9 +46,19 @@ class Brand(models.Model):
         super(Brand,self).save(*args , **kwargs) #=======> 
 
 
+    def __str__(self):
+        return self.name
+    
+    
 class Review(models.Model):
-    user = models.ForeignKey(User,related_name='review_user',on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product,related_name='review_product',on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='review_user', on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, related_name='review_product', on_delete=models.CASCADE)
     review = models.TextField(max_length=100)
-    rate = models.IntegerField(choices={(i,i) for i in range(1,6)})
-    create_at = models.TimeField(timezone.now)
+    rate = models.IntegerField(choices={(i, i) for i in range(1, 6)})
+    create_at = models.TimeField(default=timezone.now)
+
+
+    def __str__(self):
+        return self.user
+    
+    
