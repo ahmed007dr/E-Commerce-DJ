@@ -1847,6 +1847,9 @@ tbody tr td:last-child {
 
 .product-image img {
   width: 100%;
+  height: 300px;  /* حدد ارتفاع الصورة */
+  object-fit: contain;  /* اجعل الصورة تناسب الإطار دون تشويه */
+
 }
 
 .product-widget {

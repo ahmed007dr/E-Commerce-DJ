@@ -35,7 +35,7 @@ def seed_product(n):
             description=fake.text(max_nb_chars=1000),
             tags=fake.word(),
             brand=random.choice(brands),  # Choose a random brand from the list
-            image=f'products/{random.choice(images)}',  # Choose a random image from the list
+            image=f'product/{random.choice(images)}',  # Choose a random image from the list
         )
     
     print(f'number of products {n}')
