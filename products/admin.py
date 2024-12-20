@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Product , Brand , ProdcutImages ,Review
+from .models import Product , Brand , ProductImages ,Review
 
 
 class ProductImagesInLine(admin.TabularInline):
-    model = ProdcutImages  # استخدم الاسم الصحيح للموديل
+    model = ProductImages  # استخدم الاسم الصحيح للموديل
 
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImagesInLine]  # إضافة الـ inlines لعرض الصور داخل المنتج

@@ -32,9 +32,9 @@ class Product(models.Model):
         return self.name
     
 
-class ProdcutImages(models.Model):
-    prodcut = models.ForeignKey(Product,related_name='prodcut_image',on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='product_image')
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, related_name='product_images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images/')
 
 class Brand(models.Model):
     name = models.CharField(max_length=120)

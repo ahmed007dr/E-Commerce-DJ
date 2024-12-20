@@ -14,25 +14,21 @@
                                 <label class="details-label off">-10%</label>
                             </div>
                             <ul class="details-preview"> 
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for image in images %}
+                                    <li><img src="{{ image.image.url }}" alt="product"></li>
+                                {% endfor %}
                             </ul>
                             <ul class="details-thumb">
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
-                                <li><img src="images/product/01.jpg" alt="product"></li>
+                                {% for image in images %}
+                                    <li><img src="{{ image.image.url }}" alt="product"></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         
                         <div class="details-content">
-                            <h3 class="details-name"><a href="#">{{object.subtitle}}</a></h3>
+                            <h3 class="details-name"><a href="#">{{object.name}}</a></h3>
                             <div class="details-meta">
                                 <p>SKU:<span>{{object.sku}}</span></p>
                                 <p>BRAND:<a href="#">{{object.brand}}</a></p>
