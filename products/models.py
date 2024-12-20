@@ -59,6 +59,6 @@ class Review(models.Model):
 
 
     def __str__(self):
-        return self.user
+        return str(self.user)  # هذا سيعرض اسم المستخدم
     
     
