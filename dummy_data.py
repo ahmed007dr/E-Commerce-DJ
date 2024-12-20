@@ -45,5 +45,5 @@ def seed_product(n):
 
 
 
-# seed_brand(10)
+# seed_brand(20)
 seed_product(1000)
