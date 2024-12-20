@@ -8,10 +8,11 @@ from django.shortcuts import get_object_or_404
 
 class ProductList(ListView):
     model = Product
-
+    paginate_by = 20
 
 class ProductDetail(DetailView):
     model = Product
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  # Get the default context with the product object
@@ -23,17 +24,19 @@ class ProductDetail(DetailView):
 
 class BrandList(ListView):
     model = Brand
+    paginate_by = 20
 
 
 class BrandDetail(ListView):
     model = Product
     template_name = 'products/brand_detail.html'
+    paginate_by = 20
 
     def get_queryset(self):
         # Ensure we're fetching the correct brand based on the slug
         brand = get_object_or_404(Brand, slug=self.kwargs['slug'])
         # Return products that belong to this brand
-        return Product.objects.filter(brand=brand)
+        return Product.objects.filter(brand=brand)[:10]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
