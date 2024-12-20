@@ -2,12 +2,14 @@ from rest_framework import serializers
 from .models import Product, Brand
 
 class ProductSerializer(serializers.ModelSerializer):
-    brand = serializers.StringRelatedField
+    brand = serializers.StringRelatedField()
     class Meta:
         model = Product
         fields = "__all__"
 
 class ProductDetailsSerializer(serializers.ModelSerializer):
+    brand = serializers.StringRelatedField()
+
     class Meta:
         model = Product
         fields = "__all__"
