@@ -40,10 +40,20 @@ class BrandDetail(ListView):
         # Return products that belong to this brand
         return Product.objects.filter(brand=brand)[:10]
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # Add the brand to the context so we can display its name and details
+    #     context['brand'] = get_object_or_404(Brand, slug=self.kwargs['slug']).annotate(product_brand=Count('product_brand'))[0]
+    #     return context
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Add the brand to the context so we can display its name and details
-        context['brand'] = get_object_or_404(Brand, slug=self.kwargs['slug'])
+        # الحصول على الكائن الصحيح من العلامة التجارية باستخدام slug
+        brand = get_object_or_404(Brand, slug=self.kwargs['slug'])
+        # استخدام annotate للحصول على عدد المنتجات المرتبطة بالعلامة التجارية
+        brand_with_count = Brand.objects.annotate(product_count=Count('product_brand')).get(slug=self.kwargs['slug'])
+        
+        context['brand'] = brand_with_count
         return context
 
 
