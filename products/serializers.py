@@ -18,10 +18,16 @@ class ProductSerializer(serializers.ModelSerializer):
 
 class ProductDetailsSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField()
+    review_count = serializers.SerializerMethodField() # add new column in API view url <<<<<<<<
 
     class Meta:
         model = Product
         fields = "__all__"
+
+    def get_review_count(self, obj): #get_{field_name}
+        reviews = object.review_product.all().count() # review_product دا اسم العلاقه اللي في جدول التقيمات
+        return reviews
+
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
