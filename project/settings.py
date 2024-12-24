@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'drf_yasg',  
+    "debug_toolbar",
 
 
     'products',
@@ -55,7 +56,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+
 ]
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1", # debug tool bar
+    # ...
+]
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,  # التحكم في من يستطيع رؤية الـ Toolbar
+}
+
 
 ROOT_URLCONF = 'project.urls'
 
