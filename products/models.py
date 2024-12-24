@@ -76,6 +76,6 @@ class Review(models.Model):
 
 
     def __str__(self):
-        return str(self.user)  # هذا سيعرض اسم المستخدم
+        return f'Review by {self.user} on {self.product} - Rating: {self.rate} - {self.create_at}'
     
     
