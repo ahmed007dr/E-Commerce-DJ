@@ -39,7 +39,7 @@
                                 <i class="active icofont-star"></i>
                                 <i class="active icofont-star"></i>
                                 <i class="icofont-star"></i>
-                                <a href="#">(3 reviews)</a>
+                                <a href="#">({{object.get_review_count}} reviews)</a>
                             </div>
                             <h3 class="details-price">
                                 <span>${{object.price}}<small>/per kilo</small></span>
@@ -106,7 +106,7 @@
                         </div>
 
                         <div class="product-details-frame">
-                            <h3 class="frame-title">Reviews (2)</h3>
+                            <h3 class="frame-title">Reviews ({{object.get_review_count}})</h3>
                             <ul class="review-list">
                                 {% for review in reviews %}
                                     <li class="review-item">
@@ -220,7 +220,7 @@
                                     <i class="active icofont-star"></i>
                                     <i class="active icofont-star"></i>
                                     <i class="icofont-star"></i>
-                                    <a href="product-video.html">(3)</a>
+                                    <a href="product-video.html">({{object.get_review_count}})</a>
                                 </div>
                                 <h6 class="product-name">
                                     <a href="product-video.html">{{object.name}}</a>

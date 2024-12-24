@@ -31,6 +31,22 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     
+    #take it from serializers.py
+    def get_review_count(self): #get_{field_name}
+        reviews = self.review_product.all().count() # review_product دا اسم العلاقه اللي في جدول التقيمات
+        return reviews
+
+    def get_average_rate(self):
+        total = 0 # sum rate : object
+        reviews = self.review_product.all()
+        if len(reviews) > 0 :
+            for item in reviews:
+                total += item.rate # rate column in reviews
+            avg = total / len (reviews)
+        else:
+            avg = 0
+        return avg
+
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, related_name='product_images', on_delete=models.CASCADE)
