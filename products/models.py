@@ -32,10 +32,12 @@ class Product(models.Model):
         return self.name
     
     #take it from serializers.py
+    @property # NEW COLUMN IN DB
     def get_review_count(self): #get_{field_name}
         reviews = self.review_product.all().count() # review_product دا اسم العلاقه اللي في جدول التقيمات
         return reviews
-
+    
+    @property #new column in DB
     def get_average_rate(self):
         total = 0 # sum rate : object
         reviews = self.review_product.all()

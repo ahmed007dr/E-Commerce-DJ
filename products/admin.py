@@ -11,7 +11,7 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImagesInLine]  # إضافة الـ inlines لعرض الصور داخل المنتج
     search_fields = ['name', 'flag', 'price', 'sku']  # حقول البحث في واجهة المنتج
     extra = 1  # عدد الصفوف الإضافية التي تظهر بشكل افتراضي
-
+    list_display = ['name','price','brand','get_review_count','get_average_rate']
 
 class BrandAdmin(admin.ModelAdmin):
     search_fields = ['name']  # حقول البحث في واجهة المنتج
