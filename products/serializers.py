@@ -1,6 +1,17 @@
 from rest_framework import serializers 
 
-from .models import Product, Brand, Review
+from .models import Product, Brand, Review , ProductImages
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta :
+        model= ProductImages
+        fields = ['image']
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = '__all__'
+
 
 class ProductSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField()
@@ -33,7 +44,10 @@ class ProductDetailsSerializer(serializers.ModelSerializer):
     brand = serializers.StringRelatedField()
     review_count = serializers.SerializerMethodField() # add new column in API view url <<<<<<<<
     average_rate = serializers.SerializerMethodField()  # Corrected method name
+    images = ProductImageSerializer(source='product_images',many=True) # joine new column from anther classs ' product_images' > related
+    reviews = ReviewSerializer(source='review_product',many=True) # new column in API view ' with new related 
 
+    
     class Meta:
         model = Product
         fields = "__all__"

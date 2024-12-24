@@ -13,7 +13,10 @@ class ProductAdmin(admin.ModelAdmin):
     extra = 1  # عدد الصفوف الإضافية التي تظهر بشكل افتراضي
 
 
+class BrandAdmin(admin.ModelAdmin):
+    search_fields = ['name']  # حقول البحث في واجهة المنتج
+
 
 admin.site.register(Product,ProductAdmin)
-admin.site.register(Brand)
+admin.site.register(Brand,BrandAdmin)
 admin.site.register(Review)
