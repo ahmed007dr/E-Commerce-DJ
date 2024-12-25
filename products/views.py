@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404
 
 from django.db.models.aggregates import Count
 
+
+
 class ProductList(ListView):
     model = Product
     paginate_by = 20
@@ -23,11 +25,11 @@ class ProductDetail(DetailView):
         context['related'] = Product.objects.filter(brand=self.get_object().brand)[:10]
         return context
     
+
 class BrandList(ListView):
     model = Brand
     paginate_by = 20
     queryset = Brand.objects.annotate(product_count=Count('product_brand'))# related_name = ' product_brand' === class product
-
 
 class BrandDetail(ListView):
     model = Product
