@@ -407,4 +407,42 @@
 
 
 
+        <!--=====================================
+                  TESTIMONIAL PART START
+        =======================================-->
+        <section class="section testimonial-part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading">
+                            <h2>client's feedback</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="testimonial-slider slider-arrow">
+                            {% for item in reviews %}
+                                <div class="testimonial-card">
+                                    <i class="fas fa-quote-left"></i>
+                                    <p>{{item.review}}</p>
+                                    <h5>{{item.user}}</h5>
+                                    <ul>
+                                        <li class="fas fa-star"></li>
+                                        <li class="fas fa-star"></li>
+                                        <li class="fas fa-star"></li>
+                                        <li class="fas fa-star"></li>
+                                        <li class="fas fa-star"></li>
+                                    </ul>
+                                    <img src="images/avatar/01.jpg" alt="testimonial">
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--=====================================
+                   TESTIMONIAL PART END
+        =======================================-->
         {% endblock %}
