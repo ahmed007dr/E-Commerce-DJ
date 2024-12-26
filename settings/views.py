@@ -8,6 +8,8 @@ def home(request):
     new_products = Product.objects.filter(flag='New')[:10]
     sale_products = Product.objects.filter(flag='Sale')[:10]
     feature_products = Product.objects.filter(flag='Feature')[:6]
+    
+    random_product = Product.objects.all()
 
     brands = Brand.objects.annotate(product_count=Count('product_brand'))[:10]
     reviews = Review.objects.all()[:6]
@@ -21,4 +23,5 @@ def home(request):
         'brands':brands,
         'reviews':reviews,
         'settings':settings,
+        'random_product':random_product,
     })
