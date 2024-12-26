@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views.generic import ListView,DetailView
 # Create your views here.
 from .models import Product , Brand , Review ,ProductImages
@@ -66,3 +66,17 @@ class BrandDetail(ListView):
 #         context['products'] = Product.objects.filter(brand = self.get_object())
 
 #         return context
+
+def add_review(request,slug):
+    product = Product.objects.get(slug=slug)
+    review = request.POST['review'] 
+    rate = request.POST['rate']
+    # Calculate average rating or get the first review's rating for demonstration
+
+    Review.objects.create(
+        user = request.user,
+        product = product ,
+        review = review ,
+        rate = rate
+    )
+    return redirect(f'/products/{slug}')
