@@ -5,6 +5,7 @@ from django.db import models
 class Settings(models.Model):
     name = models.CharField(max_length=100)
     logo = models.ImageField(upload_to='settings')
+    width_logo = models.ImageField(upload_to='settings',null=True,blank=True)
     subtitle = models.TextField(max_length=500)
     call_us = models.CharField(max_length=25)
     emails_us = models.TextField(max_length=25)
