@@ -8,7 +8,7 @@ from . import serializers
 
 class ProductListAPI(generics.ListAPIView):
     queryset = Product.objects.all()
-    serializer_class = serializers.ProductDetailsSerializer
+    serializer_class = serializers.ProductSerializer
     filter_backends = [DjangoFilterBackend,filters.SearchFilter]
     filterset_fields = ['flag', 'name','price']
     search_fields = ['name', 'price']
@@ -20,7 +20,7 @@ class ProductDetailAPI(generics.RetrieveAPIView):
 
 class BrandListAPI(generics.ListAPIView):
     queryset = Brand.objects.all()
-    serializer_class = serializers.BrandDetailsSerializer
+    serializer_class = serializers.BrandSerializer
     filter_backends = [DjangoFilterBackend,filters.SearchFilter]
     filterset_fields = ['slug', 'name']
 
