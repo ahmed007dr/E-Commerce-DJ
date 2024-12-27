@@ -20,7 +20,12 @@ class Settings(models.Model):
     def __str__(self):
         return self.name
     
+class Locations(models.Model):
+    name = models.CharField(max_length=30)
+    details_name = models.CharField(max_length=200)
+
 class DeliveryFee(models.Model):
+    location = models.OneToOneField(Locations,related_name='fee_location',on_delete=models.CASCADE)
     fee=models.IntegerField()
     
     def __str__(self):
