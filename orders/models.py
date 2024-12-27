@@ -12,7 +12,7 @@ ORDER_STATUS = (
     ('shipped', 'shipped'),
     ('delivered', 'delivered')
 )
-class Order(models.Model):
+class Order(models.Model): #INVOICE
     user = models.ForeignKey(User,related_name='order_owner',on_delete=models.SET_NULL,null=True,blank=True)
     status = models.CharField(choices=ORDER_STATUS,max_length=12)
     code = models.CharField(default=generate_code,max_length=8)
@@ -24,12 +24,30 @@ class Order(models.Model):
     total_with_coupon = models.FloatField(null=True,blank=True)
 
 
-class OrderDetail(models.Model):
+class OrderDetail(models.Model): #INVOICE
     order = models.ForeignKey(Order,related_name='order_details',on_delete=models.CASCADE)
     products =  models.ForeignKey(Product,related_name = 'orderdetail_product',on_delete=models.SET_NULL,null=True,blank=True)
     quantity = models.IntegerField()
     price = models.FloatField()
     total = models.FloatField()
+
+CART_STATUS = (
+    ('in-progress', 'in-progress'),
+    ('completed', 'completed'),
+)
+class Cart(models.Model):
+    user = models.ForeignKey(User,related_name='cart_owner',on_delete=models.SET_NULL,null=True,blank=True)
+    status = models.CharField(choices=CART_STATUS,max_length=12)
+    coupon = models.ForeignKey("Coupon",related_name='cart_coupon',on_delete=models.SET_NULL,null=True,blank=True)
+    total_with_coupon = models.FloatField(null=True,blank=True)
+
+
+class CartDetail(models.Model):
+    cart = models.ForeignKey(Cart,related_name='cart_details',on_delete=models.CASCADE)
+    products =  models.ForeignKey(Product,related_name = 'cartdetail_product',on_delete=models.SET_NULL,null=True,blank=True)
+    quantity = models.IntegerField(default=1)
+    total = models.FloatField(null=True,blank=True)
+
 
 
 class Coupon(models.Model): # only for admin
