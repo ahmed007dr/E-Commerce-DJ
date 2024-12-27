@@ -116,10 +116,14 @@
                         <img src="{{settings_data.logo.url}}" alt="logo">
                     </a>
                     <a href="login.html" class="header-widget" title="My Account">
-                        <img src="{{settings_data.logo.url}}" alt="user">
-                        <span>join</span>
+                        {% if user.is_authenticated %}
+                            <img src="{{settings_data.logo.url}}" alt="user">
+                        {% else %}
+                            <a href="login.html" class="login-link">Login</a>
+                            <a href="signup.html" class="signup-link">Join</a>
+                        {% endif %}
                     </a>
-
+                    
                     <form class="header-form">
                         <input type="text" placeholder="Search anything...">
                         <button><i class="fas fa-search"></i></button>
