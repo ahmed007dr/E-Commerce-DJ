@@ -11,6 +11,7 @@ urlpatterns = [
     
     path('<slug:slug>/add-review', add_review),  
 
+
     #API URLS
     path('api/list',api.ProductListAPI.as_view()),
     path('api/list/<int:pk>',api.ProductDetailAPI.as_view()),

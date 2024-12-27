@@ -44,6 +44,8 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('__debug__/', include(debug_toolbar.urls)),  
     path('',include("settings.urls")),
+    path('',include("orders.urls")),
+    path('',include("accounts.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

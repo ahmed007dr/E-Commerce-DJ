@@ -23,3 +23,17 @@ intermeiate
     - redis
     - ajxs
     
+#####################################
+app orders :- 
+    address
+    products
+    brand
+    price
+    quantity
+    order_Time
+    delivery_time
+    order_id
+    total_item
+    discount
+    delivery fee
+    status =['recieved','processed','shipped','delivered']
