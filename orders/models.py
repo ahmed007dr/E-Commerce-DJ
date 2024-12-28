@@ -23,13 +23,21 @@ class Order(models.Model): #INVOICE
     total = models.FloatField()
     total_with_coupon = models.FloatField(null=True,blank=True)
 
+    def __str__(self) -> str:
+        return f'{self.user} - {self.total} ' 
+
 
 class OrderDetail(models.Model): #INVOICE
     order = models.ForeignKey(Order,related_name='order_details',on_delete=models.CASCADE)
     products =  models.ForeignKey(Product,related_name = 'orderdetail_product',on_delete=models.SET_NULL,null=True,blank=True)
     quantity = models.IntegerField()
     price = models.FloatField()
-    total = models.FloatField()
+    total = models.FloatField(null=True,blank=True)
+
+
+
+    def __str__(self) -> str:
+        return f'{self.quantity} - {self.total} ' 
 
 CART_STATUS = (
     ('in-progress', 'in-progress'),
@@ -42,12 +50,17 @@ class Cart(models.Model):
     total_with_coupon = models.FloatField(null=True,blank=True)
 
 
+    def __str__(self) -> str:
+        return f'{self.user} - {self.status} ' 
+
 class CartDetail(models.Model):
     cart = models.ForeignKey(Cart,related_name='cart_details',on_delete=models.CASCADE)
     products =  models.ForeignKey(Product,related_name = 'cartdetail_product',on_delete=models.SET_NULL,null=True,blank=True)
     quantity = models.IntegerField(default=1)
     total = models.FloatField(null=True,blank=True)
 
+    def __str__(self) -> str:
+        return f'{self.cart} - {self.quantity} - {self.total} ' 
 
 
 class Coupon(models.Model): # only for admin
@@ -61,3 +74,9 @@ class Coupon(models.Model): # only for admin
         week = datetime.timedelta(days=7)
         self.end_date = self.start_date + week
         super(Coupon,self).save(*args,**kwargs)
+    
+    
+    def __str__(self) -> str:
+        return f'{self.code} - {self.start_date} - {self.end_date} - {self.quantity} - {self.discount} ' 
+
+    
