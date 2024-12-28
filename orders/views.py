@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 
 # Create your views here.
 from .models import Order , OrderDetail,Cart,CartDetail,Coupon
-
+from products.models import Product
 from django.core.paginator import Paginator
 
 def order_list(request):
@@ -17,3 +17,24 @@ def order_list(request):
 def checkout(request):
     pass
     return render(request,'orders/checkout.html',{})
+
+def add_to_cart(request):
+    # Get the product based on the POST data (assuming product_id is passed)
+    product = Product.objects.get(id=request.POST['product_id'])
+    quantity = int(request.POST['quantity'])
+
+    # Get the cart for the current user with status 'in-progress'
+    cart = Cart.objects.get(user=request.user, status="in-progress")
+    
+    # Use 'products' instead of 'product' (because the field is 'products' according to the error)
+    cart_detail, created = CartDetail.objects.get_or_create(cart=cart, products=product)
+
+    # If you want to update the quantity, set it directly (overwriting previous quantity)
+    cart_detail.quantity = quantity
+    cart_detail.total = round(product.price * cart_detail.quantity, 2)
+    
+    # Save the updated cart detail
+    cart_detail.save()
+    
+    # Redirect to the product detail page (use the correct slug for redirection)
+    return redirect(f'/products/{product.slug}')
