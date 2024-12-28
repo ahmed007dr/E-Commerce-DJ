@@ -12,7 +12,6 @@ def order_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    print (orders)
     return render(request, 'orders/order_list.html', {'page_obj': page_obj , 'orders':orders})
 
 def checkout(request):

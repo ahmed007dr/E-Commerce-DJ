@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'en/css/orderlist.css'%}">
+    <link rel="stylesheet" href="{% static 'en/css/orderlist.css' %}">
 {% endblock css %}
 
 {% block body %} 
@@ -139,17 +139,17 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {% for item in orders.order_details.all %}
+                                                        {% for item in order.order_details.all %}
                                                             <tr>
                                                                 <td class="table-serial"><h6>01</h6></td>
                                                                 <td class="table-image">
-                                                                    <img src="{{ item.product.image.url }}" alt="product" >
+                                                                    <img src="{{ item.products.image.url }}" alt="product" >
                                                                 </td>
-                                                                <td class="table-name"><h6>{{ item.product.name  }}</h6>
+                                                                <td class="table-name"><h6>{{ item.products.name  }}</h6>
                                                                 </td>
                                                                 <td class="table-price"><h6>${{ item.price }}<small>/kilo</small></h6>
                                                                 </td>
-                                                                <td class="table-brand"><h6>{{ item.product.brand }}</h6>
+                                                                <td class="table-brand"><h6>{{ item.products.brand }}</h6>
                                                                 </td>
                                                                 <td class="table-quantity"><h6>{{ item.quantity }}</h6>
                                                                 </td>
