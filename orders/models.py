@@ -49,9 +49,16 @@ class Cart(models.Model):
     coupon = models.ForeignKey("Coupon",related_name='cart_coupon',on_delete=models.SET_NULL,null=True,blank=True)
     total_with_coupon = models.FloatField(null=True,blank=True)
 
+    @property
+    def cart_total(self): # video 38 
+        total = 0
+        for item in self.cart_details.all():
+            total += item.total
+        return round(total,2)
 
     def __str__(self) -> str:
-        return f'{self.user} - {self.status} ' 
+        return f'name of client {self.user} - {self.status} - cart total for user {self.cart_total}' 
+    
 
 class CartDetail(models.Model):
     cart = models.ForeignKey(Cart,related_name='cart_details',on_delete=models.CASCADE)
