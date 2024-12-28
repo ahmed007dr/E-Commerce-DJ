@@ -4,6 +4,8 @@ from django.shortcuts import render , redirect
 from .models import Order , OrderDetail,Cart,CartDetail,Coupon
 from products.models import Product
 from django.core.paginator import Paginator
+from settings.models import DeliveryFee
+
 
 def order_list(request):
     orders = Order.objects.filter(user=request.user).order_by('-order_time')  
@@ -15,8 +17,21 @@ def order_list(request):
     return render(request, 'orders/order_list.html', {'page_obj': page_obj , 'orders':orders})
 
 def checkout(request):
-    pass
-    return render(request,'orders/checkout.html',{})
+    cart = Cart.objects.get(user=request.user, status='in-progress')
+    cart_detail = CartDetail.objects.filter(cart=cart)
+    delivery_fee = DeliveryFee.objects.last().fee
+    
+    sub_total = cart.cart_total
+    discount = 0 
+    total = sub_total + delivery_fee
+
+    return render(request,'orders/checkout.html',{
+        'cart_detail':cart_detail,
+        'delivery_fee':delivery_fee,
+        'sub_total':sub_total,
+        'total':total,
+        "discount":discount,
+    })
 
 def add_to_cart(request):
     # Get the product based on the POST data (assuming product_id is passed)
