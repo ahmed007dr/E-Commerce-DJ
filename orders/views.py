@@ -1,11 +1,11 @@
 from django.shortcuts import render , redirect
-
+from django.shortcuts import get_object_or_404 # try exept no error 
 # Create your views here.
 from .models import Order , OrderDetail,Cart,CartDetail,Coupon
 from products.models import Product
 from django.core.paginator import Paginator
 from settings.models import DeliveryFee
-
+import datetime
 
 def order_list(request):
     orders = Order.objects.filter(user=request.user).order_by('-order_time')  
@@ -21,17 +21,47 @@ def checkout(request):
     cart_detail = CartDetail.objects.filter(cart=cart)
     delivery_fee = DeliveryFee.objects.last().fee
     
+
+    if request.method =='POST':
+        code = request.POST['coupon']
+        coupon = get_object_or_404(Coupon,code=code) 
+
+        if coupon and coupon.quantity > 0 : # video 39
+            today_date = datetime.datetime.today().date()
+            if today_date >= coupon.start_date and today_date <= coupon.end_date:
+                coupon_value = round(cart.cart_total / 100 * coupon.discount,2)
+                sub_total = cart.cart_total - coupon_value
+                total = sub_total + delivery_fee
+
+                cart.coupon = coupon
+                cart.total_with_coupon = sub_total
+                cart.save()
+
+
+                return render(request,'orders/checkout.html',{
+                    'cart_detail':cart_detail,
+                    'delivery_fee':delivery_fee,
+                    'sub_total':sub_total,
+                    'total':total,
+                    "discount":coupon_value
+                })
+
+
+
+    # Access the property without parentheses
     sub_total = cart.cart_total
-    discount = 0 
+    discount = 0
     total = sub_total + delivery_fee
 
-    return render(request,'orders/checkout.html',{
-        'cart_detail':cart_detail,
-        'delivery_fee':delivery_fee,
-        'sub_total':sub_total,
-        'total':total,
-        "discount":discount,
+    return render(request, 'orders/checkout.html', {
+        'cart_detail': cart_detail,
+        'delivery_fee': delivery_fee,
+        'subtotal': sub_total,
+        'discount': discount,
+        'total': total,
     })
+
+
 
 def add_to_cart(request):
     # Get the product based on the POST data (assuming product_id is passed)
