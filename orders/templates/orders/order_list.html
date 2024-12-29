@@ -61,19 +61,19 @@
                                             <div class="order-track">
                                                 <ul class="order-track-list">
                                                     <li class="order-track-item {% if order.status == 'received' or order.status == 'processed' or order.status == 'shipped' or order.status == 'delivered' %} active {% endif %}">
-                                                        <i class="icofont-{% if order.status == 'received' or order.status == 'processed' or order.status == 'shipped' or order.status == 'delivered' %} check {% else %}close{% endif %}"></i>
-                                                        <span>order recieved</span>
+                                                        <i class="icofont-{% if order.status == 'received' or order.status == 'processed' or order.status == 'shipped' or order.status == 'delivered' %} check {% else %} close {% endif %}"></i>
+                                                        <span>order received</span>
                                                     </li>
                                                     <li class="order-track-item {% if order.status == 'processed' or order.status == 'shipped' or order.status == 'delivered' %} active {% endif %}">
-                                                        <i class="icofont-close{% if order.status == 'processed' or order.status == 'shipped' or order.status == 'delivered' %} check {% else %}close{% endif %}"></i>
+                                                        <i class="icofont-{% if order.status == 'processed' or order.status == 'shipped' or order.status == 'delivered' %} check {% else %} close {% endif %}"></i>
                                                         <span>order processed</span>
                                                     </li>
-                                                    <li class="order-track-item{% if order.status == 'shipped' or order.status == 'delivered' %} active {% endif %}">
-                                                        <i class="icofont-close{% if order.status == 'shipped' or order.status == 'delivered' %} check {% else %} close {% endif %}"></i>
+                                                    <li class="order-track-item {% if order.status == 'shipped' or order.status == 'delivered' %} active {% endif %}">
+                                                        <i class="icofont-{% if order.status == 'shipped' or order.status == 'delivered' %} check {% else %} close {% endif %}"></i>
                                                         <span>order shipped</span>
                                                     </li>
-                                                    <li class="order-track-item{% if order.status == 'delivered' %} active {% endif %}">
-                                                        <i class="icofont-close{% if order.status == 'delivered' %} check {% else %} close {% endif %}"></i>
+                                                    <li class="order-track-item {% if order.status == 'delivered' %} active {% endif %}">
+                                                        <i class="icofont-{% if order.status == 'delivered' %} check {% else %} close {% endif %}"></i>
                                                         <span>order delivered</span>
                                                     </li>
                                                 </ul>
@@ -87,7 +87,7 @@
                                                 </li>
                                                 <li>
                                                     <h6>Total Item</h6>
-                                                    <p>6 Items</p>
+                                                    <p>{{cart_detail_data|length}} Items</p>
                                                 </li>
                                                 <li>
                                                     <h6>Order Time</h6>

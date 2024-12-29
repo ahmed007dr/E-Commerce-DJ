@@ -70,7 +70,8 @@ def add_to_cart(request):
 
     # Get the cart for the current user with status 'in-progress'
     cart = Cart.objects.get(user=request.user, status="in-progress")
-    
+    # print(request.POST)
+
     # Use 'products' instead of 'product' (because the field is 'products' according to the error)
     cart_detail, created = CartDetail.objects.get_or_create(cart=cart, products=product)
 
