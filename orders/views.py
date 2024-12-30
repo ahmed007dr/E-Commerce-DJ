@@ -43,11 +43,11 @@ def checkout(request):
                     'delivery_fee':delivery_fee,
                     'sub_total':sub_total,
                     'total':total,
-                    "discount":coupon_value
+                    "discount":coupon_value # إرسال قيمة الخصم
                 })
 
 
-
+    # إذا لم يكن هناك كوبون
     # Access the property without parentheses
     sub_total = cart.cart_total
     discount = 0
@@ -56,8 +56,8 @@ def checkout(request):
     return render(request, 'orders/checkout.html', {
         'cart_detail': cart_detail,
         'delivery_fee': delivery_fee,
-        'subtotal': sub_total,
-        'discount': discount,
+        'sub_total':sub_total,
+        'discount': discount,  # إرسال 0 في حالة عدم وجود خصم
         'total': total,
     })
 
