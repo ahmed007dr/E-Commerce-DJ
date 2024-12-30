@@ -20,7 +20,7 @@ class OrderDetailSerializers(serializers.ModelSerializer):
 
 
 class OrderSerializers(serializers.ModelSerializer):
-    order_detail = OrderDetailSerializers(many=True)
+    order_details = OrderDetailSerializers(many=True) # order_details relalted in order class model.py
     class Meta:
         model = Order
         fields = '__all__'
