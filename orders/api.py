@@ -72,8 +72,8 @@ class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
     def post(self,request,*args, **kwargs):
         user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
 
-        code=request.data['payment_code']  # sent from mobile app
-        address = request.data['address_id'] # sent from mobile app
+        code=request.data['payment_code']  # sent from mobile app # POST > VIEW ||||| data > API
+        address = request.data['address_id'] # sent from mobile app # POST > VIEW ||||| data > API
 
         cart = Cart.objects.get(user=user, status='in-progress')
         cart_details = CartDetail.objects.filter(cart=cart)
@@ -112,5 +112,34 @@ class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
         # sent email here after finish 
         return responses({'message': 'order was created successfully'},status=status.HTTP_201_CREATED)
             
-class CartCreateUpdateDelete(generics.GenericAPIView):
-    pass
+class CartCreateUpdateDelete(generics.GenericAPIView): # method post , get , delete
+    def get(self,request,*args, **kwargs):
+        user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
+        cart , created = Cart.objects.get_or_create(user=user,status='in-progress')
+        data = CartSerializers(cart).data# that's mean return with cart detail not cart (look at serlizers.py ) # POST > VIEW ||||| data > API
+        return responses ({'cart':data})
+    
+
+    def post(self,request,*args, **kwargs):
+        #add or update
+        user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
+        product = Product.objects.get(id=request.POST['product_id'])
+        quantity = int(request.data['quantity']) # POST > VIEW ||||| data > API
+
+        cart = Cart.objects.get(user=user, status="in-progress")
+
+        cart_detail, created = CartDetail.objects.get_or_create(cart=cart, products=product)
+
+        cart_detail.quantity = quantity
+        cart_detail.total = round(product.price * cart_detail.quantity, 2)
+
+        cart_detail.save()
+        return responses({'message':'cart was updated'},status=status.HTTP_201_CREATED)
+            
+    def delete(self,request,*args, **kwargs):
+        user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
+        cart = Cart.objects.get (user=user,status='in-progress')
+        product = CartDetail.objects.get(id=request.data['item-id']) # delete from order details 
+        product.delete()
+        return responses({'message':'was deleted '},status=status.HTTP_202_ACCEPTED)
+ 
