@@ -4,7 +4,7 @@ from .forms import SignupForm,UserActivateForm
 from .models import Profile
 # Create your views here.
 from django.core.mail import send_mail
-
+        
 def signup(request):  # Fixed spelling from 'singup' to 'signup'
     '''
     - create new user
@@ -14,8 +14,8 @@ def signup(request):  # Fixed spelling from 'singup' to 'signup'
     if request.method == 'POST':
         form = SignupForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username'] # fetch user & email to un activate
-            email = form.cleaned_data['email']
+            username = form.cleaned_data['username'] # fetch user & email to un activate # cleaned_date fetch from forms.py
+            email = form.cleaned_data['email'] # cleaned_date fetch from forms.py
 
             user = form.save(commit=False) # un activate 
             user.is_active = False
@@ -39,13 +39,28 @@ def signup(request):  # Fixed spelling from 'singup' to 'signup'
     return render(request, 'accounts/signup.html', {'form': form})
 
 
-def user_activate(request):
+        
+def user_activate(request,username):
     '''
     - code -----> activate
     - redirect -----> login
     '''
+    profile = Profile.objects.get(user__username=username)
     if request.method == 'POST':
         form = UserActivateForm(request.POST)
+        if form.is_valid():
+            code = form.cleaned_data['code'] # cleaned_date fetch from forms.py
+            if code == profile.code:
+                profile.code = '' # تحسين الأمان لأنه يمنع الأشخاص من محاولة استخدام الرمز مجددًا
+
+                user = User.objects.get(username=username)
+                user.is_active = True
+                user.save()
+                profile.save()
+
+                return redirect('/accounts/login')
+        
+                    
         # Add your form handling logic here
     else :
         form = UserActivateForm()
