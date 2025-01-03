@@ -2,8 +2,13 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def sigup(request): # VIDEO 41
+def singup(request): # VIDEO 41
     pass
+'''
+ - create new user
+- send email : code 
+- redirect
+'''
 
 
 
@@ -11,3 +16,7 @@ def sigup(request): # VIDEO 41
 
 def user_activate(request): # VIDEO 41
     pass
+'''
+- code -----> activate
+- redircet -----> login
+'''

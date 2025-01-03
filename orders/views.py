@@ -5,7 +5,7 @@ from .models import Order , OrderDetail,Cart,CartDetail,Coupon
 from products.models import Product
 from django.core.paginator import Paginator
 from settings.models import DeliveryFee
-import datetime
+import datetime 
 
 def order_list(request):
     orders = Order.objects.filter(user=request.user).order_by('-order_time')  
