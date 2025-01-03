@@ -26,7 +26,7 @@ def signup(request):  # Fixed spelling from 'singup' to 'signup'
             send_mail(
                 "acctivate your account",
                 f"welcome {username}./nUser this code {profile.code} to activate your account",
-                "ahmed.tamem.eg@gmail.com",
+                "ahmed007eg@gmail.com",  # Your sender email address
                 [email],
                 fail_silently=False,
             )

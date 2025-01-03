@@ -171,10 +171,24 @@ CACHES = {
 }
 
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
-AUTHENTICATION_BACKENDS = [ # video 41
+AUTHENTICATION_BACKENDS = [ # video 41 # use to log in with email or username
     'accounts.backend.EmailOrUsernameLogin',    # app name . file name . class name
     'django.contrib.auth.backends.ModelBackend', 
 ]
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # live # video 41
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # test from consol # video 41
+
+
+#EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" # video 41
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp-relay.gmail.com"
+EMAIL_HOST_PASSWORD = "zssdmbodbjxebbov"
+EMAIL_HOST_USER = "ahmed007eg@gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
