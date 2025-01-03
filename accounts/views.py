@@ -38,7 +38,6 @@ def signup(request):  # Fixed spelling from 'singup' to 'signup'
         form = SignupForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
-
         
 def user_activate(request,username):
     '''
@@ -58,7 +57,7 @@ def user_activate(request,username):
                 user.save()
                 profile.save()
 
-                return redirect('/accounts/login')
+                return redirect('/login')
         
                     
         # Add your form handling logic here

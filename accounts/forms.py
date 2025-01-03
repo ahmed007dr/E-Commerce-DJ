@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class SignupForm(UserCreationForm): # hash password
     class Meta:
-        models = User  # default django
+        model = User  # default django
         fields = ['username','email','password1','password2']
 
 
