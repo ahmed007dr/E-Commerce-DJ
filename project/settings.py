@@ -31,7 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    'accounts', # video 42  # top
+
+    'django.contrib.admin', # after top
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -43,12 +45,12 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',  
     "debug_toolbar",
+    "django_bootstrap5",  # video 42
 
 
     'products',
     'settings',
     'orders',
-    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -192,3 +194,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
+# Redirect to home URL after login (Default redirects to /accounts/profile/)
+LOGIN_REDIRECT_URL = '/' # video 42

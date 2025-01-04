@@ -39,7 +39,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('accounts/',include("accounts.urls")),
+    path('accounts/',include("accounts.urls")), # singup
+    path('accounts/', include('django.contrib.auth.urls')), # video 42 log in & out #https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Server-side/Django/Authentication#setting_up_your_authentication_views
 
     path('admin/', admin.site.urls),
     path('products/', include('products.urls')),
