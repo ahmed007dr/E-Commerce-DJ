@@ -2,7 +2,7 @@ from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated #>>>>>>>>>>>>>>>>>>>>> token API user # video 42
 
 from .models import Product,Brand,Review,ProductImages
 from . import serializers
