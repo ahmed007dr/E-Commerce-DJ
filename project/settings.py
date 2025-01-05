@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'drf_yasg',  
     "debug_toolbar",
     "django_bootstrap5",  # video 42
+    'rest_framework.authtoken', # video 42
 
 
     'products',
@@ -101,9 +102,11 @@ WSGI_APPLICATION = 'project.wsgi.application'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
