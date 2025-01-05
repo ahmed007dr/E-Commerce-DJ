@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "django_bootstrap5",  # video 42
     'rest_framework.authtoken', # video 42
+    'rest_framework_simplejwt',  # video 43
 
 
     'products',
@@ -104,7 +105,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'PAGE_SIZE': 10,
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication', # normal AUTH
+        'rest_framework_simplejwt.authentication.JWTAuthentication', #JWT VIDEO 43
     ]
 }
 

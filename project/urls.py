@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 
 import debug_toolbar  
 
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView #JWT VIDEO 43
+
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -48,6 +50,10 @@ urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),  
     path('',include("settings.urls")),
     path('orders/',include("orders.urls")),
+
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #JWT VIDEO 43
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), #JWT VIDEO 43
+
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
