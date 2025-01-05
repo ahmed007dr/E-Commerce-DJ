@@ -8,7 +8,7 @@ class CartDetailSerializers(serializers.ModelSerializer):
 
 
 class CartSerializers(serializers.ModelSerializer):
-    cart_detail = CartDetailSerializers(many=True)
+    cart_details  = CartDetailSerializers(many=True)
     class Meta:
         model = Cart
         fields = '__all__'

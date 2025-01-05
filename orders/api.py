@@ -1,8 +1,9 @@
 from rest_framework import generics
 from django.contrib.auth.models import User
-from rest_framework.response import responses
+from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+
 
 from .serializers import CartDetailSerializers,CartSerializers,OrderDetailSerializers,OrderSerializers,CouponSerializers
 from .models import Order,OrderDetail,Cart,CartDetail,Coupon
@@ -27,7 +28,7 @@ class OrderListApi(generics.ListAPIView):
     #     user = User.objects.get(username =self.kwargs['username']) # user from path urls.py
     #     queryset = queryset.filter(user=user)
     #     data = OrderSerializers(queryset,many=True).data
-    #     return responses({'orders':data})
+    #     return Response({'orders':data})
 
 
 class OrderDetailsApi(generics.RetrieveAPIView):
@@ -62,10 +63,10 @@ class ApplyCouponApi(generics.GenericAPIView):# video 40 cart API
                 coupon.quantity -=1
                 coupon.save()
 
-                return responses({'message': 'coupon was applied successfully'},status=status.HTTP_202_ACCEPTED)
+                return Response({'message': 'coupon was applied successfully'},status=status.HTTP_202_ACCEPTED)
             else:
-                return responses({'message': 'coupon is invalid'},status=status.HTTP_404_NOT_FOUND)
-        return responses({'message': 'no coupon was found'},status=status.HTTP_404_NOT_FOUND)
+                return Response({'message': 'coupon is invalid'},status=status.HTTP_404_NOT_FOUND)
+        return Response({'message': 'no coupon was found'},status=status.HTTP_404_NOT_FOUND)
     
 
 class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
@@ -110,14 +111,14 @@ class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
         cart.save()
 
         # sent email here after finish 
-        return responses({'message': 'order was created successfully'},status=status.HTTP_201_CREATED)
+        return Response({'message': 'order was created successfully'},status=status.HTTP_201_CREATED)
             
 class CartCreateUpdateDelete(generics.GenericAPIView): # method post , get , delete
     def get(self,request,*args, **kwargs):
         user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
         cart , created = Cart.objects.get_or_create(user=user,status='in-progress')
         data = CartSerializers(cart).data# that's mean return with cart detail not cart (look at serlizers.py ) # POST > VIEW ||||| data > API
-        return responses ({'cart':data})
+        return Response ({'cart':data})
     
 
     def post(self,request,*args, **kwargs):
@@ -134,12 +135,12 @@ class CartCreateUpdateDelete(generics.GenericAPIView): # method post , get , del
         cart_detail.total = round(product.price * cart_detail.quantity, 2)
 
         cart_detail.save()
-        return responses({'message':'cart was updated'},status=status.HTTP_201_CREATED)
+        return Response({'message':'cart was updated'},status=status.HTTP_201_CREATED)
             
     def delete(self,request,*args, **kwargs):
         user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
         cart = Cart.objects.get (user=user,status='in-progress')
         product = CartDetail.objects.get(id=request.data['item-id']) # delete from order details 
         product.delete()
-        return responses({'message':'was deleted '},status=status.HTTP_202_ACCEPTED)
+        return Response({'message':'was deleted '},status=status.HTTP_202_ACCEPTED)
  
