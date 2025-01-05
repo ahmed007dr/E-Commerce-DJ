@@ -1,0 +1,307 @@
+{
+	"info": {
+		"_postman_id": "f52b766a-207f-4c36-b03d-36af38d837ab",
+		"name": "e-commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32616742"
+	},
+	"item": [
+		{
+			"name": "brand-list",
+			"item": [
+				{
+					"name": "http://127.0.0.1:8000/products/api/brands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/products/api/brands",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"products",
+								"api",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product-list",
+			"item": [
+				{
+					"name": "http://127.0.0.1:8000/products/api/list",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "token 4a8310f83bd9cb75e2895db38f51c46018544200",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/products/api/list",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"products",
+								"api",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart-list",
+			"item": [
+				{
+					"name": "get or create cart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/orders/api/ahmed/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"orders",
+								"api",
+								"ahmed",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cart update or add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/orders/api/ahmed/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"orders",
+								"api",
+								"ahmed",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cart deleted num of cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "item-id",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/orders/api/ahmed/cart/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"orders",
+								"api",
+								"ahmed",
+								"cart",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get orders details ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/orders/api/ahmed/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"orders",
+								"api",
+								"ahmed",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "coupon-apply",
+			"item": [
+				{
+					"name": "appy coupon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "coupon_code",
+									"value": "NEW_YEARS",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "ahmed2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/orders/api/ahmed2/applied-coupon/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"orders",
+								"api",
+								"ahmed2",
+								"applied-coupon",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "create-order",
+			"item": [
+				{
+					"name": "create orders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "payment_code",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "address_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/orders/api/ahmed/order/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"orders",
+								"api",
+								"ahmed",
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
