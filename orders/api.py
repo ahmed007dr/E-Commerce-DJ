@@ -50,7 +50,7 @@ class ApplyCouponApi(generics.GenericAPIView):# video 40 cart API
         cart = Cart.objects.get(user=user, status='in-progress')
 
         if coupon and coupon.quantity > 0 :
-            today_date = datetime.datetime.today.date()
+            today_date = datetime.datetime.today().date()  
             if today_date >= coupon.start_date and today_date <= coupon.end_date :
                 coupon_value = cart.cart_total * coupon.discount / 100
                 sub_total = cart.cart_total - coupon_value
@@ -85,7 +85,7 @@ class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
             user = user,
             status = 'received',
             code = code,
-            address = user_address,
+            delivery_address = user_address,
             coupon = cart.coupon,
             total_with_coupon = cart.total_with_coupon,
             total = cart.cart_total
@@ -96,7 +96,7 @@ class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
             product = Product.objects.get(id=item.products.id)
             OrderDetail.objects.create(
                 order = new_order,
-                product = product,
+                products = product,
                 quantity = product.quantity,
                 price = product.price,
                 total = round(item.quantity * product.price,2)
@@ -124,7 +124,7 @@ class CartCreateUpdateDelete(generics.GenericAPIView): # method post , get , del
     def post(self,request,*args, **kwargs):
         #add or update
         user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
-        product = Product.objects.get(id=request.POST['product_id'])
+        product = Product.objects.get(id=request.data['product_id'])
         quantity = int(request.data['quantity']) # POST > VIEW ||||| data > API
 
         cart = Cart.objects.get(user=user, status="in-progress")
