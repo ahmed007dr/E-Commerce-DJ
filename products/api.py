@@ -15,11 +15,12 @@ class ProductListAPI(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend,filters.SearchFilter]
     filterset_fields = ['flag', 'name','price']
     search_fields = ['name', 'price']
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
 
 class ProductDetailAPI(generics.RetrieveAPIView):  
     queryset = Product.objects.all()
     serializer_class = serializers.ProductDetailsSerializer
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
 
 
 class BrandListAPI(generics.ListAPIView):
@@ -27,7 +28,9 @@ class BrandListAPI(generics.ListAPIView):
     serializer_class = serializers.BrandSerializer
     filter_backends = [DjangoFilterBackend,filters.SearchFilter]
     filterset_fields = ['slug', 'name']
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
 
 class BrandDetailAPI(generics.RetrieveAPIView):  
     queryset = Brand.objects.all()
     serializer_class = serializers.BrandDetailsSerializer
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user

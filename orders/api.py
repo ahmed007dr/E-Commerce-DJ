@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated #>>>>>>>>>>>>>>>>>>>>> token API user
 
 
 from .serializers import CartDetailSerializers,CartSerializers,OrderDetailSerializers,OrderSerializers,CouponSerializers
@@ -15,6 +16,7 @@ from accounts.models import Address
 class OrderListApi(generics.ListAPIView):
     serializer_class = OrderSerializers
     queryset = Order.objects.all()
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
 
     def get_queryset(self): # plan A
         queryset = super(OrderListApi,self).get_queryset()
@@ -36,11 +38,13 @@ class OrderDetailsApi(generics.RetrieveAPIView):
     # queryset = OrderDetail.objects.all() # only one item 
     serializer_class = OrderSerializers # all data  #related_name='order_details
     queryset = Order.objects.all() # all data 
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
 
 
 import datetime
 
 class ApplyCouponApi(generics.GenericAPIView):# video 40 cart API
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
 
 
     def post(self,request,*args,**kwargs):
@@ -70,6 +74,8 @@ class ApplyCouponApi(generics.GenericAPIView):# video 40 cart API
     
 
 class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
+
     def post(self,request,*args, **kwargs):
         user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
 
@@ -114,6 +120,8 @@ class CreateOrderApi(generics.GenericAPIView): # VIDEO 40 CART API
         return Response({'message': 'order was created successfully'},status=status.HTTP_201_CREATED)
             
 class CartCreateUpdateDelete(generics.GenericAPIView): # method post , get , delete
+    permission_classes = [IsAuthenticated] #>>>>>>>>>>>>>>>>>>>>> token API user
+
     def get(self,request,*args, **kwargs):
         user = User.objects.get(username=self.kwargs['username'])  # user from path urls.py
         cart , created = Cart.objects.get_or_create(user=user,status='in-progress')
