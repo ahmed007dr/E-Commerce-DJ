@@ -21,7 +21,10 @@ from django.conf.urls.static import static
 
 import debug_toolbar  
 
-from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView #JWT VIDEO 43
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -51,8 +54,11 @@ urlpatterns = [
     path('',include("settings.urls")),
     path('orders/',include("orders.urls")),
 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #JWT VIDEO 43
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), #JWT VIDEO 43
+    # path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), #JWT VIDEO 43
+    # path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), #JWT VIDEO 43
+    
+    path('api-auth/', include('dj_rest_auth.urls')), # full auth system video 43
+    path('api-auth/registration/', include('dj_rest_auth.registration.urls'))  # full auth system video 43 # sing up
 
 ]
 

@@ -40,6 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',
+    'allauth', # full auth system video 43
+    'allauth.account', # full auth system video 43
+    'allauth.socialaccount', # full auth system video 43
+    'dj_rest_auth.registration', # full auth system video 43
+
     'taggit',
     'rest_framework',
     'django_filters',
@@ -48,6 +54,7 @@ INSTALLED_APPS = [
     "django_bootstrap5",  # video 42
     'rest_framework.authtoken', # video 42
     'rest_framework_simplejwt',  # video 43
+    'dj_rest_auth', # full auth system video 43
 
 
     'products',
@@ -61,6 +68,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # # full auth system video 43
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -108,6 +116,12 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.TokenAuthentication', # normal AUTH
         'rest_framework_simplejwt.authentication.JWTAuthentication', #JWT VIDEO 43
     ]
+}
+
+# full auth system video 43 
+REST_AUTH = {
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'jwt-auth',
 }
 
 # Database
