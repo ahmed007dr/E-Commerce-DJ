@@ -9,6 +9,15 @@ from django.shortcuts import get_object_or_404
 from django.db.models.aggregates import Count
 
 
+import time #video 46
+from .tasks import execute_some #video 46
+
+
+def my_debug(request): #video 46
+    # finish loop in background without any effect with django 
+    execute_some.delay()
+
+    return render(request,'products/debug.html',{})
 
 class ProductList(ListView):
     model = Product
