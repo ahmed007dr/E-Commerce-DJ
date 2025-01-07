@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'django.contrib.sites',
+    'django.contrib.sites', # error with docker createsuperuser video 45
     'allauth', # full auth system video 43
     'allauth.account', # full auth system video 43
     'allauth.socialaccount', # full auth system video 43
