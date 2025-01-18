@@ -62,6 +62,9 @@ INSTALLED_APPS = [
     'orders',
 ]
 
+SITE_ID = 1 # fix error to pass to admin dashborad panel
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -211,19 +214,19 @@ CACHES = {
     }
 }
 
-#celery video 46
+# # celery video 46
 # Celery settings
 # Configure Celery Broker (MEMORY DB broker)  (Redis):
 
-#setting with out docker
+# # # setting with out docker
 # CELERY_BROKER_URL = 'redis://localhost:6379/0'
 # CELERY_BACKEND_RESULT = 'redis://localhost:6379/0'
 
-# command run celeery 
+# command run celeery  video 46
 #celery -A your_project worker --loglevel=info
 #celery -A project worker -l info
 
-#setting with docker
+#setting with docker video 46
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_BACKEND_RESULT = 'redis://redis:6379/0'
 

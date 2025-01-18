@@ -7,8 +7,6 @@ from .models import Product , Brand , Review ,ProductImages
 from django.shortcuts import get_object_or_404
 
 from django.db.models.aggregates import Count
-
-
 import time #video 46
 from .tasks import execute_some #video 46
 
@@ -33,7 +31,6 @@ class ProductDetail(DetailView):
         context['images'] = ProductImages.objects.filter(product=self.get_object())  # Fix typo here
         context['related'] = Product.objects.filter(brand=self.get_object().brand)[:10]
         return context
-    
 
 class BrandList(ListView):
     model = Brand
